@@ -8,20 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		09E4CD9A2024B921008C0DCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E4CD992024B921008C0DCD /* AppDelegate.swift */; };
-		09E4CD9C2024B921008C0DCD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E4CD9B2024B921008C0DCD /* ViewController.swift */; };
-		09E4CD9F2024B921008C0DCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E4CD9D2024B921008C0DCD /* Main.storyboard */; };
 		09E4CDA12024B921008C0DCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09E4CDA02024B921008C0DCD /* Assets.xcassets */; };
 		09E4CDA42024B921008C0DCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E4CDA22024B921008C0DCD /* LaunchScreen.storyboard */; };
+		09E4CDAE2024B953008C0DCD /* Factura.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E4CDAD2024B953008C0DCD /* Factura.swift */; };
+		09E4CDB22024BE57008C0DCD /* BBDD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E4CDB12024BE57008C0DCD /* BBDD.swift */; };
+		09E4CDB42024C7EE008C0DCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E4CDB32024C7EE008C0DCD /* Main.storyboard */; };
+		09E4CDB62024C871008C0DCD /* ListadoFacturasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E4CDB52024C871008C0DCD /* ListadoFacturasTableViewController.swift */; };
+		09E4CDB82024C8F4008C0DCD /* EditarFacturaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E4CDB72024C8F4008C0DCD /* EditarFacturaTableViewController.swift */; };
+		09E4CDBA2024C911008C0DCD /* DetalleFacturaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E4CDB92024C911008C0DCD /* DetalleFacturaViewController.swift */; };
+		09E4CDBC2024C95C008C0DCD /* ConceptoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E4CDBB2024C95C008C0DCD /* ConceptoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		09E4CD962024B921008C0DCD /* CoreContableSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreContableSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E4CD992024B921008C0DCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		09E4CD9B2024B921008C0DCD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		09E4CD9E2024B921008C0DCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		09E4CDA02024B921008C0DCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09E4CDA32024B921008C0DCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09E4CDA52024B921008C0DCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09E4CDAD2024B953008C0DCD /* Factura.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factura.swift; sourceTree = "<group>"; };
+		09E4CDB12024BE57008C0DCD /* BBDD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBDD.swift; sourceTree = "<group>"; };
+		09E4CDB32024C7EE008C0DCD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		09E4CDB52024C871008C0DCD /* ListadoFacturasTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListadoFacturasTableViewController.swift; sourceTree = "<group>"; };
+		09E4CDB72024C8F4008C0DCD /* EditarFacturaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditarFacturaTableViewController.swift; sourceTree = "<group>"; };
+		09E4CDB92024C911008C0DCD /* DetalleFacturaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalleFacturaViewController.swift; sourceTree = "<group>"; };
+		09E4CDBB2024C95C008C0DCD /* ConceptoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +64,35 @@
 		09E4CD982024B921008C0DCD /* CoreContableSwift */ = {
 			isa = PBXGroup;
 			children = (
+				09E4CDAC2024B940008C0DCD /* CONTROLADOR */,
+				09E4CDAB2024B92E008C0DCD /* MODELO */,
 				09E4CD992024B921008C0DCD /* AppDelegate.swift */,
-				09E4CD9B2024B921008C0DCD /* ViewController.swift */,
-				09E4CD9D2024B921008C0DCD /* Main.storyboard */,
+				09E4CDB32024C7EE008C0DCD /* Main.storyboard */,
 				09E4CDA02024B921008C0DCD /* Assets.xcassets */,
 				09E4CDA22024B921008C0DCD /* LaunchScreen.storyboard */,
 				09E4CDA52024B921008C0DCD /* Info.plist */,
 			);
 			path = CoreContableSwift;
+			sourceTree = "<group>";
+		};
+		09E4CDAB2024B92E008C0DCD /* MODELO */ = {
+			isa = PBXGroup;
+			children = (
+				09E4CDAD2024B953008C0DCD /* Factura.swift */,
+				09E4CDB12024BE57008C0DCD /* BBDD.swift */,
+			);
+			path = MODELO;
+			sourceTree = "<group>";
+		};
+		09E4CDAC2024B940008C0DCD /* CONTROLADOR */ = {
+			isa = PBXGroup;
+			children = (
+				09E4CDB52024C871008C0DCD /* ListadoFacturasTableViewController.swift */,
+				09E4CDB72024C8F4008C0DCD /* EditarFacturaTableViewController.swift */,
+				09E4CDB92024C911008C0DCD /* DetalleFacturaViewController.swift */,
+				09E4CDBB2024C95C008C0DCD /* ConceptoCell.swift */,
+			);
+			path = CONTROLADOR;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,7 +156,7 @@
 			files = (
 				09E4CDA42024B921008C0DCD /* LaunchScreen.storyboard in Resources */,
 				09E4CDA12024B921008C0DCD /* Assets.xcassets in Resources */,
-				09E4CD9F2024B921008C0DCD /* Main.storyboard in Resources */,
+				09E4CDB42024C7EE008C0DCD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,22 +167,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09E4CD9C2024B921008C0DCD /* ViewController.swift in Sources */,
+				09E4CDBC2024C95C008C0DCD /* ConceptoCell.swift in Sources */,
+				09E4CDB62024C871008C0DCD /* ListadoFacturasTableViewController.swift in Sources */,
+				09E4CDBA2024C911008C0DCD /* DetalleFacturaViewController.swift in Sources */,
+				09E4CDB22024BE57008C0DCD /* BBDD.swift in Sources */,
 				09E4CD9A2024B921008C0DCD /* AppDelegate.swift in Sources */,
+				09E4CDAE2024B953008C0DCD /* Factura.swift in Sources */,
+				09E4CDB82024C8F4008C0DCD /* EditarFacturaTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		09E4CD9D2024B921008C0DCD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				09E4CD9E2024B921008C0DCD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		09E4CDA22024B921008C0DCD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
