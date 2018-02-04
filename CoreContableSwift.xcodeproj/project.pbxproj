@@ -17,6 +17,7 @@
 		09E4CDB82024C8F4008C0DCD /* EditarFacturaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E4CDB72024C8F4008C0DCD /* EditarFacturaTableViewController.swift */; };
 		09E4CDBA2024C911008C0DCD /* DetalleFacturaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E4CDB92024C911008C0DCD /* DetalleFacturaViewController.swift */; };
 		09E4CDBC2024C95C008C0DCD /* ConceptoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E4CDBB2024C95C008C0DCD /* ConceptoCell.swift */; };
+		17DF33CB2026159100BA7277 /* EditarFacturaDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF33CA2026159100BA7277 /* EditarFacturaDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		09E4CDB72024C8F4008C0DCD /* EditarFacturaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditarFacturaTableViewController.swift; sourceTree = "<group>"; };
 		09E4CDB92024C911008C0DCD /* DetalleFacturaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalleFacturaViewController.swift; sourceTree = "<group>"; };
 		09E4CDBB2024C95C008C0DCD /* ConceptoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptoCell.swift; sourceTree = "<group>"; };
+		17DF33CA2026159100BA7277 /* EditarFacturaDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditarFacturaDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				09E4CDB72024C8F4008C0DCD /* EditarFacturaTableViewController.swift */,
 				09E4CDB92024C911008C0DCD /* DetalleFacturaViewController.swift */,
 				09E4CDBB2024C95C008C0DCD /* ConceptoCell.swift */,
+				17DF33CA2026159100BA7277 /* EditarFacturaDelegate.swift */,
 			);
 			path = CONTROLADOR;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17DF33CB2026159100BA7277 /* EditarFacturaDelegate.swift in Sources */,
 				09E4CDBC2024C95C008C0DCD /* ConceptoCell.swift in Sources */,
 				09E4CDB62024C871008C0DCD /* ListadoFacturasTableViewController.swift in Sources */,
 				09E4CDBA2024C911008C0DCD /* DetalleFacturaViewController.swift in Sources */,

@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Listado de Facturas-->
         <scene sceneID="YrE-BA-gMx">
             <objects>
-                <tableViewController id="n86-xz-vkQ" customClass="ListadoFacturasTableViewController" customModule="CoreContableSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Listado de Facturas" id="n86-xz-vkQ" customClass="ListadoFacturasTableViewController" customModule="CoreContableSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="W0O-dZ-h42">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -50,7 +50,7 @@
                             <outlet property="delegate" destination="n86-xz-vkQ" id="XNc-5f-PXf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="g0w-QX-3fT">
+                    <navigationItem key="navigationItem" title="Listado de Facturas" id="g0w-QX-3fT">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="N4N-Dg-eKz">
                             <connections>
                                 <segue destination="vK2-tA-Rz9" kind="presentation" identifier="anadirFactura" id="ZRU-Qb-L2D"/>
@@ -546,29 +546,29 @@
                     <navigationItem key="navigationItem" title="EDITAR FACTURA EMITIDA" id="2D1-4f-OUE">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="sVo-tw-ory">
                             <connections>
-                                <action selector="cancelButtonPressed:" destination="WJP-IP-Gyn" id="srl-vP-gie"/>
+                                <action selector="botonCancelPulsado:" destination="WJP-IP-Gyn" id="qNB-Zq-xHG"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="ibg-PX-Ufk">
                             <connections>
-                                <action selector="saveButtonPressed:" destination="WJP-IP-Gyn" id="Ojf-xM-8PZ"/>
+                                <action selector="botonGuardarPulsado:" destination="WJP-IP-Gyn" id="WVj-GU-mb6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
-                        <outlet property="barraEditor" destination="6GP-Rt-ax9" id="ld0-MS-h7Y"/>
-                        <outlet property="baseImponibleTextView" destination="zgd-ET-56U" id="55p-XT-p4c"/>
-                        <outlet property="cIFTextView" destination="CnW-Eh-c5x" id="eT6-oE-8wD"/>
-                        <outlet property="facturaNumeroTextView" destination="KNP-kF-tQQ" id="vgh-2g-Tv8"/>
-                        <outlet property="fechaExpedicionTextView" destination="0WU-H9-Wih" id="GRr-9f-gCx"/>
-                        <outlet property="fechaOperacionTextView" destination="Rot-cR-YqY" id="cB0-lj-fC7"/>
-                        <outlet property="ficheroTextView" destination="kvI-SZ-hZ7" id="783-F4-9iR"/>
-                        <outlet property="pickerFecha" destination="68u-z3-E3c" id="7Kc-3f-Et2"/>
-                        <outlet property="razonSocialTextView" destination="QpR-26-pzf" id="XlZ-pL-cqA"/>
-                        <outlet property="rectificacionTextView" destination="Ni6-NT-ebN" id="c4F-cL-GZA"/>
-                        <outlet property="tipoIvaTextView" destination="TUR-4v-Jto" id="RwF-Mh-Irf"/>
-                        <outlet property="totalTextView" destination="X97-M0-mfo" id="jqw-W1-uLF"/>
+                        <outlet property="barraEditor" destination="6GP-Rt-ax9" id="DmN-fC-ZFH"/>
+                        <outlet property="baseTextField" destination="zgd-ET-56U" id="ikB-pu-4k9"/>
+                        <outlet property="cIFTextField" destination="CnW-Eh-c5x" id="1sD-ms-vHo"/>
+                        <outlet property="fechaExpedicionTextField" destination="0WU-H9-Wih" id="tbX-Qz-jgv"/>
+                        <outlet property="fechaOperacionTextField" destination="Rot-cR-YqY" id="gAI-Al-lU3"/>
+                        <outlet property="ficheroTextField" destination="kvI-SZ-hZ7" id="K10-A0-CZr"/>
+                        <outlet property="numeroTextField" destination="KNP-kF-tQQ" id="f7y-sa-NYD"/>
+                        <outlet property="pickerFecha" destination="68u-z3-E3c" id="xpg-D4-vax"/>
+                        <outlet property="razonSocialTextField" destination="QpR-26-pzf" id="XDF-iz-P3t"/>
+                        <outlet property="rectificacionTextField" destination="Ni6-NT-ebN" id="j2Y-Lx-bgi"/>
+                        <outlet property="tipoIVATextField" destination="TUR-4v-Jto" id="pud-ms-aUd"/>
+                        <outlet property="totalTextField" destination="X97-M0-mfo" id="4nw-Xy-0OU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jA7-0r-nX8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -579,7 +579,7 @@
                         <!--2018-01-16 16:39:15 +0000-->
                     </date>
                     <connections>
-                        <action selector="pickerFechaCambiada:" destination="WJP-IP-Gyn" eventType="valueChanged" id="A5u-zK-Nmf"/>
+                        <action selector="pickerValueChanged:" destination="WJP-IP-Gyn" eventType="valueChanged" id="Wc4-h6-OVe"/>
                     </connections>
                 </datePicker>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="6GP-Rt-ax9">
@@ -589,7 +589,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="bib-zL-cS1"/>
                         <barButtonItem systemItem="done" id="5WN-63-UUc">
                             <connections>
-                                <action selector="botonDonePulsado:" destination="WJP-IP-Gyn" id="FQf-6z-6jN"/>
+                                <action selector="botonDonePulsado:" destination="WJP-IP-Gyn" id="UGy-ow-krB"/>
                             </connections>
                         </barButtonItem>
                     </items>
@@ -597,10 +597,10 @@
             </objects>
             <point key="canvasLocation" x="2865" y="116"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navegador Listado de Facturas-->
         <scene sceneID="Py2-55-AkM">
             <objects>
-                <navigationController id="QPd-CK-Uiq" sceneMemberID="viewController">
+                <navigationController title="Navegador Listado de Facturas" id="QPd-CK-Uiq" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2VP-lD-pdF">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -18580,6 +18580,6 @@ IQsAECEQAAAAAAAABAEAAAAAAAAAVgAAAAAAAAAAAAAAAAAQIRI
         </image>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jPG-yO-kSW"/>
+        <segue reference="ZRU-Qb-L2D"/>
     </inferredMetricsTieBreakers>
 </document>

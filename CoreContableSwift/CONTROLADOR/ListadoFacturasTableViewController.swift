@@ -6,23 +6,25 @@
 //  Copyright © 2018 TATINC. All rights reserved.
 //
 
-/*
- #import <UIKit/UIKit.h>
- #import "EditarFacturaDelegate.h"
- #import "Factura.h"
- #import "bbdd.h"
- 
- @interface ListadoFacturasController : UITableViewController <EditarFacturaDelegate>
- 
- @property (nonatomic) Factura * factura;
- 
- @property (nonatomic) bbdd *bbdd;
- */
-
 import UIKit
 
-class ListadoFacturasTableViewController: UITableViewController {
+/**
+ # CLASE ListadoFacturasTableViewController
+ 
+ Clase de la vista principal. Navegador tipo tabla. Hereda de UITableViewController
+ 
+ Delegado de EditarFacturasDelegate.
+ 
+ Vista de carga del listado de facturas con la vista de celda estandar por defecto.
+ 
+ ## Funcionalidades:
+ * Boton edit: carga de menú básico de borrado y añadido de elementos.
+ * Boton +: Añadido de nuevo elemento. Transita a la vista de edición.
+ * Selección de fila: transición a la vista de detalle de la factura.
+ */
 
+class ListadoFacturasTableViewController: UITableViewController, EditarFacturaDelegate {
+    
     /// CARGA DE VISTA. Creamos la base de datos interna que se relena con datos dummies.
     var factura = Factura.init();
     var bbdd = BBDD.init();
@@ -184,41 +186,19 @@ class ListadoFacturasTableViewController: UITableViewController {
             let filaSeleccionada = self.tableView.indexPathForSelectedRow!.row;
             let facturaSeleccionada = self.bbdd.facturas[filaSeleccionada];
             escenaDestino.factura = facturaSeleccionada;
-            
-            //EditarFacturaController *escenaDestino = segue.destinationViewController;
-            //escenaDestino.delegado = self;
         }
     
     }
 
+    // MARK: - EditarFacturaDelegate
+    
+    func guardarFactura(_ factura: Factura) {
+        self.factura = factura;
+        self.bbdd.facturas.append(factura);
+        self.dismiss(animated: true, completion: nil);
+    }
+    
+    func cancelar() {
+        self.dismiss(animated: true, completion: nil);
+    }
 }
-
-//////////////////////////////////////////////////////
-//
-//  OBJECTIVE C
-//
-//
-//
-//
-/////////////////////////////////////////////////////
-
-/*
-
- #pragma mark - Editar Contacto Delegate
- 
- -(void)cancelar
- {
- [self dismissViewControllerAnimated:true completion:nil];
- }
- 
- -(void)guardarfactura:(Factura *)factura
- {
- self.factura = factura;
- [self.bbdd.facturas addObject:factura];
- [self dismissViewControllerAnimated:true completion:nil];
- }
- 
- 
- @end
-
- */

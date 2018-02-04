@@ -9,12 +9,19 @@
 import UIKit
 import Foundation
 
-
+/**
+ 
+ # Clase Factura
+ 
+ La clase factura es una recopilación sencilla de elementos necesarios en una factura estandar según el Ministerio de Economía.
+ */
 class Factura: NSObject {
     
+/*:
     ///////////////////////////////////////
     //// VARIABLES OBLIGADAS DE FACTURA ///
     ///////////////////////////////////////
+*/
     
     /// Número de factura
     /// a) Número y, en su caso, serie.
@@ -27,14 +34,14 @@ class Factura: NSObject {
     var fechaDeOperacion : Date?;
     
     /// d) NIF y nombre y apellidos, razón o denominación social del expedidor.
-    var cIF : String?;
+    var cIF : String = "";
     
-    // $$$$ Ya veré si lo hago con expecializaciones de clase
+/*:    // $$$$ Ya veré si lo hago con expecializaciones de clase
     //@property (nonatomic) NSString *nombre;
     //@property (nonatomic) NSString *apellidos;
-    
+*/
     /// e) Nombre del contacto al que se le hace la factura. Extenderá a clase.
-    var razonSocial : String?;
+    var razonSocial : String = "";
     
     /// e) Identificación de los bienes entregados o servicios prestados.
     var conceptos : Array<String>?;
@@ -48,8 +55,7 @@ class Factura: NSObject {
     /// h) En las facturas rectificativas, la referencia a la factura rectificada.
     var rectificacion : Float?;
     
-    
-    /*
+    /*:
     /// i) En su caso, si se producen las siguientes circunstancias:
     /// - En operaciones exentas referencia a la normativa
     /// - La mención “facturación por el destinatario”
@@ -70,7 +76,6 @@ class Factura: NSObject {
     @property (nonatomic) NSFileManager *ficheroFactura;
     
     @end*/
-
 
 }
 

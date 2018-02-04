@@ -8,17 +8,34 @@
 
 import UIKit
 
+/**
+ 
+ # CLASE BASE DE DADOS
+ 
+ Clase de trabajo (funcionamiento en caliente) de almacenamiento de las facturas.
+ Incluye un constructor de generación de facturas de prueba para el testeo durante el desarrollo.
+ */
 class BBDD: NSObject {
     
+    /// Array principal de almacenamiento de facturas
     var facturas : Array<Factura>;
     
+/**
+     # OVERRIDE INIT
+     
+     Inicializador de la base de datos. Se crea una base de datos dummie con 10 facturas con datos aleatorios no vacíos.
+     
+     ## Variables internas de trabajo:
+     * facturas: array de facturas.
+ */
     override init ()
     {
+        /// init de facturas
         self.facturas = [];
         let letters : String;
         letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-        for i in 0...10
+        for i in 0..<10
         {
             let nuevaFactura : Factura = Factura();
          
@@ -44,7 +61,8 @@ class BBDD: NSObject {
                 randomString.append(letters[ix2])
             }
             
-            nuevaFactura.cIF?.append(randomString);
+            nuevaFactura.cIF.append(randomString);
+            nuevaFactura.cIF.append("\(arc4random_uniform(1000000000))")
             nuevaFactura.razonSocial = "Razon Social \(i+1)";
             
             nuevaFactura.conceptos = [];
