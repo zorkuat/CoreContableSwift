@@ -8,8 +8,18 @@
 
 import UIKit
 
+/**
+ # DETALLE FACTURA VIEW CONTROLLER
+ 
+ Controlador de vista de detalle de la factura.
+ Visualiza los datos. Gestionado a través de stacks views y listas.
+ Por encima tiene un scroll view para gestionar la lista de conceptos que puede ser todo lo larga que se quiera.
+ 
+ */
+
 class DetalleFacturaViewController: UIViewController, EditarFacturaDelegate {
 
+    /// Objeto de trabajo.
     var factura : Factura = Factura();
     
     @IBOutlet weak var facturaNumeroView: UILabel!
@@ -24,26 +34,32 @@ class DetalleFacturaViewController: UIViewController, EditarFacturaDelegate {
     @IBOutlet weak var rectificacionView: UILabel!
 
     
-    // PRE: self.factura != nil
-    // POST: UILabels[].text == self.factura.contenido
+    /// PRE: self.factura != nil
+    /// POST: UILabels[].text == self.factura.contenido
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        /// Enlace lógico de los campos de visualización y los datos.
         self.facturaNumeroView.text = factura.numero;
+        
+        /// Declaración de los formatos de fecha
         let formatoFecha : DateFormatter = DateFormatter();
         formatoFecha.dateFormat = "dd / MM / yyyy";
+        
         self.fechaExpedicionView.text = formatoFecha.string(from: self.factura.fechaDeExpedicion!);
         self.fechaOperacionView.text = formatoFecha.string(from: self.factura.fechaDeOperacion!);
         self.cIFView.text = self.factura.cIF;
         self.razonSocialView.text = self.factura.razonSocial;
         
         self.conceptoView.text = "";
+        
+        /// Bucle de muestra de los conceptos en un textView
         for i in 0 ..< self.factura.conceptos!.count
         {
             self.conceptoView.text!.append(self.factura.conceptos![i]);
             self.conceptoView.text!.append("\n");
         }
+        
         self.baseView.text = "\(self.factura.baseImponible!)"
         self.tipoIVAView.text = "\(self.factura.tipoIva!)"
         let total = self.factura.baseImponible! + self.factura.baseImponible!*Float(self.factura.tipoIva!)/100.0 - self.factura.rectificacion!;
@@ -64,11 +80,13 @@ class DetalleFacturaViewController: UIViewController, EditarFacturaDelegate {
         self.razonSocialView.text = self.factura.razonSocial;
         
         self.conceptoView.text = "";
+        
         for i in 0 ..< self.factura.conceptos!.count
         {
             self.conceptoView.text!.append(self.factura.conceptos![i]);
             self.conceptoView.text!.append("\n");
         }
+        
         self.baseView.text = "\(self.factura.baseImponible!)"
         self.tipoIVAView.text = "\(self.factura.tipoIva!)"
         let total = self.factura.baseImponible! + self.factura.baseImponible!*Float(self.factura.tipoIva!)/100.0 - self.factura.rectificacion!;
@@ -99,12 +117,27 @@ class DetalleFacturaViewController: UIViewController, EditarFacturaDelegate {
     
     // MARK: - Editar Contacto Delegate
     
+    /**
+     # GUARDAR FACTURA. Método delegado.
+     
+     Método que guarda el objeto de trabajo en la base de datos principal
+     
+     * Parameters:
+     - factura: Factura Objeto principal de la base de trabajo.
+     
+     */
     func guardarFactura(_ factura: Factura) {
         self.factura = factura;
         //self.bbdd.facturas.append(factura);
         self.dismiss(animated: true, completion: nil);
     }
     
+    /**
+     # CANCELAR. Método delegado.
+     
+     Método que restaura los valores anteriores. Los objetos ya están salvaguardados en el método de llamada. Con lo que sólo hay que disolver la vista.
+     
+     */
     func cancelar() {
         self.dismiss(animated: true, completion: nil);
     }

@@ -7,17 +7,33 @@
 //
 
 import UIKit
-
+/**
+ # Celda propia "customizada"
+ 
+ Celda que contiene un TextFieldView interno con forzado de márgenes a cero arriba y abajo y con un margen de 40 (para dejar espacio al botón de edición) y 10 lateral derecho.
+ Se define la celda con un tamaño enorme que luego ajustará el tableView.
+ */
 class ConceptoCell: UITableViewCell {
 
     @IBOutlet weak var conceptoTextView: UITextField!
-    
+
+    /**
+     # MÉTODO INIT?
+     Gestor obligado para el alamacenaje y recuperación interna del xib.
+     
+     * Parameters:
+        - coder:NSCoder Objeto codificador de recuperación del xib. Por defecto.
+     */
     required init?(coder aDecoder: NSCoder) {
         //fatalError("init(coder:) has not been implemented")
         super.init(coder: aDecoder);
-
     }
 
+    /**
+     # MÉTODO INIT
+     
+     Inicializador de la celda vía estilo. Se necesita que exista un identificador registrado en el TABLEVIEW de la celda para que pueda invocarse.
+     */
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

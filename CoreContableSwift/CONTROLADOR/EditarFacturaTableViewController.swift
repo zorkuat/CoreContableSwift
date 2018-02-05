@@ -8,8 +8,26 @@
 
 import UIKit
 
+/**
+
+ # CLASE EditarFacturaTableViewController
+ 
+ Clase de la vista de Edición. Navegador tipo tabla. Hereda de UITableViewController
+ 
+ Llama al delegado EditarFacturasDelegate para la salvaguarda de los datos.
+ 
+ Vista de edición del detalle de facturas.
+ 
+ ## Funcionalidades:
+ * Boton save: Salva la información guardada en la base de datos principal y vuelve a la vista de llamada (de detalle o de listado, según quien haya llamado).
+ * Boton Cancel: Regresa sin guardar a la vista anterior.
+ * Añadido de información de datos simples: Carga manual vía texto o picker.
+ * Gestión de datos multivaluados: Inclusión, modificación y borrado de nuevos campos multivaluados vía celdas editables nuevas.
+
+ */
 class EditarFacturaTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    /// Correspondencias con las vistas del mainstoryboard
     @IBOutlet weak var numeroTextField: UITextField!
     @IBOutlet weak var fechaExpedicionTextField: UITextField!
     @IBOutlet weak var fechaOperacionTextField: UITextField!
@@ -21,16 +39,26 @@ class EditarFacturaTableViewController: UITableViewController, UIImagePickerCont
     @IBOutlet weak var rectificacionTextField: UITextField!
     @IBOutlet weak var ficheroTextField: UITextField!
     
+    /// Correspondencias con las vistas del picker y auiliar del mainstoryboard
     @IBOutlet var pickerFecha: UIDatePicker!
     @IBOutlet var barraEditor: UIToolbar!
     
+    /// Objeto de trabajo de interfaces de entrada de los datos multivaluados.
     var listaConceptos : Array<UITextField> = [];
+    
+    /// Referencia al campo de texto actual seleccionado.
     var campoTextoActual : UITextField?;
+    
+    /// referencia al campo de texto "nuevo" de la lista de celdas de conceptos
     var campoTextoNuevo : UITextField?;
  
+    /// Objeto de trabajo de factura actual
     var factura : Factura = Factura();
+    
+    /// Copia guardada de los conceptos para salvaguarda en caso de cancelación
     var copiaConceptos : Array<String> = [];
  
+    /// Referencia al delegado de guarda de factura.
     weak var delegado : EditarFacturaDelegate?;
     
     ////////////////////////////////////
@@ -41,7 +69,8 @@ class EditarFacturaTableViewController: UITableViewController, UIImagePickerCont
     ///////////////////////////////////////////////////////////////////////////////////////
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews();
-        
+    
+        /// Registro de la celda customizada para su reutilización.
         tableView.register(ConceptoCell.self, forCellReuseIdentifier: "ConceptoCell");
     }
     
@@ -54,29 +83,35 @@ class EditarFacturaTableViewController: UITableViewController, UIImagePickerCont
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        // Inicialización del objeto de trabajo conceptos que servirá para salvaguardar en caso de cancelación
+        /// Inicialización del objeto de trabajo conceptos que servirá para salvaguardar en caso de cancelación
         self.copiaConceptos = self.factura.conceptos!;
 
-        // Enlace de los pickers para fecha y botón accesorio adjunto
+        /// Enlaces lógicos entre el picker para fecha (más botón accesorio adjunto) y las interfaces de texto
         self.pickerFecha.translatesAutoresizingMaskIntoConstraints = false;
         self.fechaExpedicionTextField.inputView = self.pickerFecha;
         self.fechaExpedicionTextField.inputAccessoryView = self.barraEditor;
         self.fechaOperacionTextField.inputView = self.pickerFecha;
         self.fechaOperacionTextField.inputAccessoryView = self.barraEditor;
         
+        /// Enlaces lógicos entre las interfaces de entrada y los datos del objeto de trabajo.
         self.numeroTextField.text = self.factura.numero;
         self.cIFTextField.text = self.factura.cIF;
         self.razonSocialTextField.text = self.factura.razonSocial;
         self.baseTextField.text = "\(self.factura.baseImponible!)";
         self.tipoIVATextField.text = "\(self.factura.tipoIva!)";
         self.rectificacionTextField.text = "\(self.factura.rectificacion!)";
+        /// Cálculo del campo computado
         let total = self.factura.baseImponible! + self.factura.baseImponible!*Float(self.factura.tipoIva!)/100.0 - self.factura.rectificacion!;
         self.totalTextField.text = "\(total)"
         
+        /// Enlace lógico entre el picker y el dato de trabajo.
         self.pickerFecha.date = (self.factura.fechaDeExpedicion!)
+        
+        /// Definición del formato de visualización de fecha en las interfaces correspondientes.
         let formatoFecha : DateFormatter = DateFormatter();
         formatoFecha.dateFormat = "dd / MM / yyyy";
         
+        /// Enlaces lógicos entre los datos y las interfaces de entrada de datos
         if let fecha = self.factura.fechaDeExpedicion
         {
             self.fechaExpedicionTextField.text = formatoFecha.string(from: fecha);
@@ -89,6 +124,7 @@ class EditarFacturaTableViewController: UITableViewController, UIImagePickerCont
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        /// Establecimiento de la tabla en modo editable.
         tableView.setEditing(true, animated: false);
     }
 
@@ -117,6 +153,7 @@ class EditarFacturaTableViewController: UITableViewController, UIImagePickerCont
         }
     }
     
+    /// Actualización de los valores de selección de fecha
     @IBAction func pickerValueChanged(_ sender: Any) {
         
         let formatoFecha : DateFormatter = DateFormatter();
@@ -140,17 +177,44 @@ class EditarFacturaTableViewController: UITableViewController, UIImagePickerCont
     ////////////////////////////
     
     // MARK: - BOTONES
+    
+    /**
+     # BOTON CANCEL PULSADO
+     
+     Método para volver atrás salvaguardando los datos anteriores y deshaciendo la operación.
+     Como en realidad, el objeto de trabajo 'factura' no se toca, pero el listado de conceptos si, se restaura la lista de conceptos y se llama al padre.
+     El listado de conceptos se utiliza para mantener la estructura dinámica de tabla.
+     
+     * Parameters:
+        - sender: Any Controlador padre y delegado de los métodos Cancelar y guardar
+     */
     @IBAction func botonCancelPulsado(_ sender: Any) {
+        /// Restauramos conceptos
         self.factura.conceptos = self.copiaConceptos;
+        /// Llamamos al método de cancelación del delegado
         self.delegado?.cancelar();
     }
     
+    /**
+     # BOTON GUARDAR PULSADO
+     
+     Método para guardar la información en la base de datos principal
+     Se recopilan todos los datos desde los campos.
+     
+     Se guardan los conceptos.
+     
+     Se llama al delegado.
+     
+     * Parameters:
+        - sender: Any Controlador padre y delegado de los métodos Cancelar y guardar
+    */
     @IBAction func botonGuardarPulsado(_ sender: Any) {
         /// Durante el botón guardado, actualizamos los valores desde las vistas al objeto de trabajo
         self.factura.numero = self.numeroTextField.text!;
         self.factura.cIF = self.cIFTextField.text!;
         self.factura.razonSocial = self.razonSocialTextField.text!;
         
+        /// Guardamos los conceptos uno a uno
         for i in 0 ..< listaConceptos.count
         {
             self.factura.conceptos![i] = self.listaConceptos[i].text!;
@@ -245,10 +309,10 @@ class EditarFacturaTableViewController: UITableViewController, UIImagePickerCont
         {
             textField.resignFirstResponder();
         }
-        
         return true
     }
     
+    /// Si se ha empezado a editar un campo, se establece como campo actual.
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.campoTextoActual = textField;
     }
@@ -259,7 +323,7 @@ class EditarFacturaTableViewController: UITableViewController, UIImagePickerCont
     /// MÉTODOS DE CONSTRUCCIÓN DE TABLE VIEW ///
     /////////////////////////////////////////////
     
-    // Número de filas por sección
+    /// Número de filas por sección
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 1
@@ -272,15 +336,18 @@ class EditarFacturaTableViewController: UITableViewController, UIImagePickerCont
         }
     }
 
+    /// Como se utilizan secciones, es necesario establecer el nivel de sangrado
     override func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
         return 1;
     }
     
+    /// Se establece el tamaño de la altura como fijo para todas las celdas de la tabla. EL propio TableView Gestiona el scroll.
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 43.0;
     }
     
-    
+    /// Inserta una celda en el índice pertinente y la devuelve para su registro.
+    /// En este caso no hace falta registrar la celda ya que se registra a la entrada de la construcción de la tabla.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 1
         {
@@ -306,7 +373,6 @@ class EditarFacturaTableViewController: UITableViewController, UIImagePickerCont
     }
 
     /// DEFINICIÓN DE LOS ESTILOS DE LA TABLA SEGÚN EL INDEX PATH.
-    /// $$$$ FALTA POR DEFINIR LA ÚLTIMA CELDA DE AÑADIR QUE TENDRÁ UN BOTÓN DE EDICIÓN $$$$
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         if indexPath.section == 1 && indexPath.row < self.listaConceptos.count
         {
@@ -320,7 +386,7 @@ class EditarFacturaTableViewController: UITableViewController, UIImagePickerCont
         return UITableViewCellEditingStyle.none;
     }
     
-    // Override to support conditional editing of the table view.
+    /// Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         if indexPath.section == 1
@@ -333,19 +399,22 @@ class EditarFacturaTableViewController: UITableViewController, UIImagePickerCont
         }
     }
     
-    // Override to support editing the table view.
+    /// Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            
             // Delete the row from the data source
             /// BORRAMOS EL ELEMENTO DE LA LISTA DE CONCEPTOS
             self.listaConceptos.remove(at: indexPath.row);
             self.factura.conceptos!.remove(at: indexPath.row);
+            
             /// REAJUSTAMOS LA VISTA DE TABLA
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
+            
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
             /// INSERTAMOS UNA NUEVA CELDA EN EL TABLE VIEW Y EN LA LISTA DE CONCEPTOS.
-            //let cell : ConceptoCell = ConceptoCell(style: UITableViewCellStyle.default, reuseIdentifier: "ConceptoCell");
+            /// Creamos una celda nueva y actualizamos el campo nuevo en vacío.
             let cell : ConceptoCell = tableView.dequeueReusableCell(withIdentifier: "ConceptoCell") as! ConceptoCell;
             cell.conceptoTextView.text = self.campoTextoNuevo!.text;
             self.campoTextoNuevo!.text = "";

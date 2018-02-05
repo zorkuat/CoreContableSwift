@@ -22,7 +22,6 @@ import UIKit
  * Boton +: Añadido de nuevo elemento. Transita a la vista de edición.
  * Selección de fila: transición a la vista de detalle de la factura.
  */
-
 class ListadoFacturasTableViewController: UITableViewController, EditarFacturaDelegate {
     
     /// CARGA DE VISTA. Creamos la base de datos interna que se relena con datos dummies.
